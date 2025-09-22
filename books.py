@@ -14,6 +14,7 @@ class Livro:
         self.titulo = titulo
         self.autor = autor
         self.disponivel = True
+        self.quantidadeDeEmprestimos = 0
 
     def __str__(self):
         status = "Disponível" if self.disponivel else "Emprestado"
@@ -94,6 +95,7 @@ class Biblioteca:
             return
 
         livro.disponivel = False
+        livro.quantidadeDeEmprestimos += 1
         self.emprestimos[id_livro] = id_usuario
         print(f"Livro ID {id_livro} emprestado para usuário ID {id_usuario}.")
 
@@ -150,6 +152,7 @@ def main():
             biblioteca.deletar_usuario(id_u)
         elif opcao == "5":
             titulo = input("Título do livro: ")
+            autor = input("Autor do livro: ")
             biblioteca.criar_livro(titulo, autor)
         elif opcao == "6":
             biblioteca.listar_livros()
