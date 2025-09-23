@@ -1,3 +1,5 @@
+import csv
+
 class Usuario:
     def __init__(self, id_usuario, nome, email):
         self.id = id_usuario
@@ -116,9 +118,48 @@ class Biblioteca:
             livro = self.livros.get(id_livro)
             print(f"Livro: {livro.titulo} (ID {id_livro}) -> Usuário: {usuario.nome} (ID {id_usuario})")
 
+    def gerar_relatorio_emprestimos(self, caminho_arquivo="relatorio_emprestimos.csv"):
+        with open(caminho_arquivo, mode="w", newline="") as arquivo:
+            writer = csv.writer(arquivo)
+            writer.writerow(["Nome do Livro", "Número de Empréstimos"])
+            for livro in self.livros.values():
+                writer.writerow([livro.titulo, livro.quantidadeDeEmprestimos])
+        print(f"Relatório salvo em {caminho_arquivo}")
+
+
+def exemplos_criacao_livros_e_emprestimos(biblioteca):
+    # Criação de livros
+    biblioteca.criar_livro("Senhor dos Anéis", "J.R.R. Tolkien")  # id 1
+    biblioteca.criar_livro("Dom Quixote", "Miguel de Cervantes")  # id 2
+    biblioteca.criar_livro("O Pequeno Príncipe", "Antoine de Saint-Exupéry")  # id 3
+    biblioteca.criar_livro("1984", "George Orwell")  # id 4
+    biblioteca.criar_livro("Harry Potter e a Pedra Filosofal", "J.K. Rowling")  # id 5
+
+    # Criação de usuários
+    biblioteca.criar_usuario("Maria", "maria@email.com")  # id 1
+    biblioteca.criar_usuario("João", "joao@email.com")    # id 2
+    biblioteca.criar_usuario("Ana", "ana@email.com")      # id 3
+
+    # Empréstimos
+    biblioteca.emprestar_livro(1, 1)  # Maria pega Senhor dos Anéis
+    biblioteca.devolver_livro(1)
+    biblioteca.emprestar_livro(2, 1)  # João pega Senhor dos Anéis
+    biblioteca.devolver_livro(1)
+    biblioteca.emprestar_livro(3, 1)  # Ana pega Senhor dos Anéis
+    biblioteca.devolver_livro(1)
+    biblioteca.emprestar_livro(1, 2)  # Maria pega Dom Quixote
+    biblioteca.devolver_livro(2)
+    biblioteca.emprestar_livro(2, 3)  # João pega O Pequeno Príncipe
+    biblioteca.devolver_livro(3)
+    biblioteca.emprestar_livro(3, 4)  # Ana pega 1984
+    biblioteca.devolver_livro(4)
+    biblioteca.emprestar_livro(1, 1)  # Maria pega Senhor dos Anéis de novo
+    biblioteca.devolver_livro(1)
+
 
 def main():
     biblioteca = Biblioteca()
+    exemplos_criacao_livros_e_emprestimos(biblioteca)
 
     while True:
         print("\n--- MENU ---")
@@ -133,6 +174,7 @@ def main():
         print("9. Emprestar livro")
         print("10. Devolver livro")
         print("11. Listar empréstimos")
+        print("12. Gerar relatório de empréstimos (CSV)")
         print("0. Sair")
 
         opcao = input("Escolha uma opção: ")
@@ -172,6 +214,8 @@ def main():
             biblioteca.devolver_livro(id_l)
         elif opcao == "11":
             biblioteca.listar_emprestimos()
+        elif opcao == "12":
+            biblioteca.gerar_relatorio_emprestimos()
         elif opcao == "0":
             print("Saindo...")
             break
