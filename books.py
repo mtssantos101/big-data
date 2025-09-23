@@ -1,3 +1,5 @@
+from grafico import gerar_grafico_livros
+
 class Usuario:
     def __init__(self, id_usuario, nome, email):
         self.id = id_usuario
@@ -120,6 +122,46 @@ class Biblioteca:
 def main():
     biblioteca = Biblioteca()
 
+    biblioteca.criar_livro("Senhor dos Anéis", "J.R.R. Tolkien") 
+    biblioteca.criar_livro("Dom Quixote", "Miguel de Cervantes") 
+    biblioteca.criar_livro("O Pequeno Príncipe", "Antoine de Saint-Exupéry")  
+    biblioteca.criar_livro("1984", "George Orwell")  
+    biblioteca.criar_livro("Harry Potter e a Pedra Filosofal", "J.K. Rowling") 
+
+    biblioteca.criar_usuario("Maria", "maria@email.com")  
+    biblioteca.criar_usuario("João", "joao@email.com")   
+    biblioteca.criar_usuario("Ana", "ana@email.com")      
+
+    biblioteca.emprestar_livro(1, 1)
+    biblioteca.devolver_livro(1)
+    biblioteca.emprestar_livro(2, 1) 
+    biblioteca.devolver_livro(1)
+    biblioteca.devolver_livro(1)
+    biblioteca.emprestar_livro(1, 2) 
+    biblioteca.devolver_livro(2)
+    biblioteca.emprestar_livro(2, 3) 
+    biblioteca.devolver_livro(3)
+    biblioteca.emprestar_livro(3, 4) 
+    biblioteca.devolver_livro(4)
+    biblioteca.emprestar_livro(1, 1) 
+    biblioteca.devolver_livro(1)
+    biblioteca.emprestar_livro(2, 2)
+    biblioteca.devolver_livro(2)
+    biblioteca.emprestar_livro(3, 2)  
+    biblioteca.devolver_livro(2)
+    biblioteca.emprestar_livro(1, 3)
+    biblioteca.devolver_livro(3)
+    biblioteca.emprestar_livro(2, 4)  
+    biblioteca.devolver_livro(4)
+    biblioteca.emprestar_livro(3, 5) 
+    biblioteca.devolver_livro(5)
+    biblioteca.emprestar_livro(1, 5) 
+    biblioteca.devolver_livro(5)
+    biblioteca.emprestar_livro(2, 5)  
+    biblioteca.devolver_livro(5)
+    biblioteca.emprestar_livro(3, 5) 
+    biblioteca.devolver_livro(5)
+
     while True:
         print("\n--- MENU ---")
         print("1. Criar usuário")
@@ -133,6 +175,7 @@ def main():
         print("9. Emprestar livro")
         print("10. Devolver livro")
         print("11. Listar empréstimos")
+        print("12. Gráfico de livros mais emprestados")
         print("0. Sair")
 
         opcao = input("Escolha uma opção: ")
@@ -172,6 +215,8 @@ def main():
             biblioteca.devolver_livro(id_l)
         elif opcao == "11":
             biblioteca.listar_emprestimos()
+        elif opcao == '12':
+            gerar_grafico_livros(biblioteca)
         elif opcao == "0":
             print("Saindo...")
             break
