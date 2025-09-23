@@ -24,4 +24,5 @@ def gerar_grafico_livros(biblioteca):
     plt.gca().yaxis.set_major_locator(MaxNLocator(integer=True))
 
     plt.tight_layout()
+    plt.savefig('grafico.png')
     plt.show()
