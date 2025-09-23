@@ -1,3 +1,5 @@
+from grafico import gerar_grafico_livros
+
 class Usuario:
     def __init__(self, id_usuario, nome, email):
         self.id = id_usuario
@@ -133,6 +135,7 @@ def main():
         print("9. Emprestar livro")
         print("10. Devolver livro")
         print("11. Listar empréstimos")
+        print("12. Gráfico de livros mais emprestados")
         print("0. Sair")
 
         opcao = input("Escolha uma opção: ")
@@ -172,6 +175,8 @@ def main():
             biblioteca.devolver_livro(id_l)
         elif opcao == "11":
             biblioteca.listar_emprestimos()
+        elif opcao == '12':
+            gerar_grafico_livros(biblioteca)
         elif opcao == "0":
             print("Saindo...")
             break
